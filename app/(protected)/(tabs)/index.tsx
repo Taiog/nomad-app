@@ -1,31 +1,42 @@
+import { Box } from '@/src/components/Box';
 import { CityCard } from '@/src/components/CityCard';
 import { Screen } from '@/src/components/Screen';
+import { CityFilter } from '@/src/containers/CityFilter';
+import { categories } from '@/src/data/categories';
 import { cityPreviewList } from '@/src/data/cities';
 import { useAppTheme } from '@/src/theme/useAppTheme';
 import { CityPreview } from '@/src/types';
 import { useScrollToTop } from '@react-navigation/native';
 import { useRef } from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 export default function HomeScreen() {
   const { spacing } = useAppTheme();
+  const { top } = useSafeAreaInsets()
 
   const flatListRef = useRef(null);
   useScrollToTop(flatListRef)
 
   function renderItem({ item }: ListRenderItemInfo<CityPreview>) {
-    return <CityCard cityPreview={item} />
+    return (
+      <Box paddingHorizontal='padding'>
+        <CityCard cityPreview={item} />
+      </Box>
+    )
   }
   return (
-    <Screen  >
+    <Screen style={{ paddingHorizontal: 0 }}>
       <FlatList
         data={cityPreviewList}
         renderItem={renderItem}
         ref={flatListRef}
-        contentContainerStyle={{ gap: spacing.padding }}
+        contentContainerStyle={{ gap: spacing.padding, paddingTop: top, paddingBottom: spacing.padding }}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.id} />
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={<CityFilter categories={categories} />}
+      />
     </Screen>
   );
 }

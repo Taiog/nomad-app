@@ -11,6 +11,13 @@ type SearchInputProps = {
 export function SearchInput({ onChangeText, value, placeholder }: SearchInputProps) {
     const { colors, textVariants } = useAppTheme()
     const [isFocused, setIsFocused] = useState(false)
+
+    function onPressIconButton() {
+        if (value!.length > 0) {
+            onChangeText?.("");
+        }
+    }
+
     return (
         <Box {...boxStyle} style={{ borderColor: isFocused ? colors.primary : colors.gray1 }}>
             <TextInput
@@ -27,7 +34,10 @@ export function SearchInput({ onChangeText, value, placeholder }: SearchInputPro
                     width: '100%',
                     flexShrink: 1,
                 }} />
-            <IconButton iconName='Search-outline' onPress={() => { }} />
+            <IconButton
+                iconName={!!value?.length ? "Close" : "Search-outline"}
+                onPress={onPressIconButton}
+            />
         </Box>
     )
 }

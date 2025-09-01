@@ -1,7 +1,7 @@
 import { City, CityPreview } from "../types";
 import { categories } from "./categories";
 
-export const cities: City[] = [
+export const cities: (City & { relatedCitiesIds: string[] })[] = [
   {
     id: "rio-de-janeiro",
     name: "Rio de Janeiro",
@@ -58,29 +58,25 @@ export const cities: City[] = [
       {
         id: "tokyo1",
         name: "Templo Senso-ji",
-        description:
-          "O templo mais antigo de Tóquio e um local de grande importância espiritual.",
+        description: "O templo mais antigo de Tóquio e um local de grande importância espiritual.",
         cityId: "tokyo",
       },
       {
         id: "tokyo2",
         name: "Torre de Tóquio",
-        description:
-          "Um dos ícones da cidade, com vistas panorâmicas incríveis.",
+        description: "Um dos ícones da cidade, com vistas panorâmicas incríveis.",
         cityId: "tokyo",
       },
       {
         id: "tokyo3",
         name: "Shibuya Crossing",
-        description:
-          "A famosa interseção movimentada, conhecida em todo o mundo.",
+        description: "A famosa interseção movimentada, conhecida em todo o mundo.",
         cityId: "tokyo",
       },
       {
         id: "tokyo4",
         name: "Parque Ueno",
-        description:
-          "Um amplo parque com museus, templos e cerejeiras em flor na primavera.",
+        description: "Um amplo parque com museus, templos e cerejeiras em flor na primavera.",
         cityId: "tokyo",
       },
     ],
@@ -97,13 +93,7 @@ export const cities: City[] = [
     coverImage: require("./images/bangkok.jpg"),
     description:
       "Bangkok, a capital vibrante da Tailândia, é uma cidade que mistura tradição e modernidade. Famosa por seus templos históricos, mercados de rua movimentados e arranha-céus imponentes, a cidade é um dos destinos turísticos mais dinâmicos do Sudeste Asiático.",
-    categories: [
-      categories[0],
-      categories[4],
-      categories[1],
-      categories[6],
-      categories[5],
-    ], // Cultura, História, Compras
+    categories: [categories[0], categories[4], categories[1], categories[6], categories[5]], // Cultura, História, Compras
     touristAttractions: [
       {
         id: "bangkok1",
@@ -153,8 +143,7 @@ export const cities: City[] = [
       {
         id: "barcelona1",
         name: "Sagrada Família",
-        description:
-          "Uma das basílicas mais impressionantes do mundo, projetada por Antoni Gaudí.",
+        description: "Uma das basílicas mais impressionantes do mundo, projetada por Antoni Gaudí.",
         cityId: "barcelona",
       },
       {
@@ -167,8 +156,7 @@ export const cities: City[] = [
       {
         id: "barcelona3",
         name: "Casa Batlló",
-        description:
-          "Outro marco arquitetônico de Gaudí, conhecido por sua fachada distinta.",
+        description: "Outro marco arquitetônico de Gaudí, conhecido por sua fachada distinta.",
         cityId: "barcelona",
       },
       {

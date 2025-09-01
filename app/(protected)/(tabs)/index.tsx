@@ -2,7 +2,7 @@ import { Box } from '@/src/components/Box';
 import { CityCard } from '@/src/components/CityCard';
 import { Screen } from '@/src/components/Screen';
 import { CityFilter } from '@/src/containers/CityFilter';
-import { categories } from '@/src/data/categories';
+import { useCategories } from '@/src/data/useCategories';
 import { useCities } from '@/src/data/useCities';
 import { useDebounce } from '@/src/hooks/useDebounce';
 import { useAppTheme } from '@/src/theme/useAppTheme';
@@ -24,10 +24,12 @@ export default function HomeScreen() {
 
   const debouncedCityName = useDebounce(cityName);
 
-  const { cityPreviewList } = useCities({
+  const { data: cities } = useCities({
     name: debouncedCityName,
     categoryId: selectedCategoryId,
   });
+
+  const { data: categories } = useCategories();
 
   const flatListRef = useRef(null);
   useScrollToTop(flatListRef)
@@ -43,7 +45,7 @@ export default function HomeScreen() {
     <Screen style={{ paddingHorizontal: 0 }}>
       <Animated.FlatList
         itemLayoutAnimation={FadingTransition.duration(500)}
-        data={cityPreviewList}
+        data={cities}
         renderItem={renderItem}
         ref={flatListRef}
         contentContainerStyle={{ gap: spacing.padding, paddingTop: top, paddingBottom: spacing.padding }}

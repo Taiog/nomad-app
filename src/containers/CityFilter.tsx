@@ -5,7 +5,7 @@ import { SearchInput } from "../components/SearchInput";
 import { Category } from "../types";
 
 type CityFilterProps = {
-    categories: Category[]
+    categories?: Category[]
     cityName: string
     onChangeCityName: (cityName: string) => void;
     selectedCategoryId: string | null;
@@ -20,7 +20,7 @@ export function CityFilter({ categories, cityName, onChangeCityName, onChangeSel
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
 
                 <Box flexDirection="row" mt="s16" gap="s8" paddingHorizontal="padding">
-                    {categories.map((category) => (<CategoryPill key={category.id} category={category} active={category.id === selectedCategoryId} onPress={() => onChangeSelectedCategoryId(category.id === selectedCategoryId ? null : category.id)} />))}
+                    {categories?.map((category) => (<CategoryPill key={category.id} category={category} active={category.id === selectedCategoryId} onPress={() => onChangeSelectedCategoryId(category.id === selectedCategoryId ? null : category.id)} />))}
                 </Box>
             </ScrollView>
         </Box>

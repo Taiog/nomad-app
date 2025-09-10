@@ -1,19 +1,28 @@
-import { Button } from "@/src/ui/components/Button";
+import { useAuthSignUp } from "@/src/domain/auth/operations/useAuthSignUp";
 import { Header } from "@/src/ui/components/Header";
 import { Screen } from "@/src/ui/components/Screen";
 import { Logo } from "@/src/ui/containers/Logo";
+import { SignUpForm } from "@/src/ui/containers/SignUpForm/SignUpForm";
+import { SignUpSchema } from "@/src/ui/containers/SignUpForm/SignUpSchema";
+import { router } from "expo-router";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
-    function handleSignUp() {
-        //
+    const { mutate: signUp } = useAuthSignUp({ onSuccess: router.back });
+
+    function handleSignUp(formValues: SignUpSchema) {
+        signUp({
+            email: formValues.email,
+            fullname: formValues.fullname,
+            password: formValues.password,
+        });
     }
     return (
-        <Screen>
+        <Screen scrollable>
             <SafeAreaView>
                 <Header title="Criar conta" />
-                <Button title="Criar conta" onPress={handleSignUp} />
+                <SignUpForm onSubmit={handleSignUp} />
                 <Logo />
             </SafeAreaView>
         </Screen>
